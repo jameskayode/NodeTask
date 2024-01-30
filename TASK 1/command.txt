@@ -1,0 +1,3 @@
+originalFileName.txt
+renamedFileName.txt
+Hello, Node.js!
