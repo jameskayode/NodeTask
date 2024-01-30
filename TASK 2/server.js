@@ -16,19 +16,18 @@ const server = http.createServer((req, res) => {
     servePage(filePath, res);
   }
   else {
-    res.writeHead(404);
     const filePath = path.join(__dirname, './html/notfound.html');
-    servePage(filePath, res);
+    servePage(filePath, res, 404);
   }
 });
 
-function servePage(filePath, res) {
+function servePage(filePath, res, statusCode = 200) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       res.writeHead(500);
       res.end('Internal Server Error');
     } else {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.writeHead(statusCode, { 'Content-Type': 'text/html' });
       res.end(data);
     }
   });
